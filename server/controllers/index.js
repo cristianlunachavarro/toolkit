@@ -1,13 +1,17 @@
-import { getAllFiles } from "../utilities/index.js"
+const { getAllFiles } = require("../utilities")
 
-export const listFormattedFiles = async (req, res) => {
+const listFormattedFiles = async (req, res) => {
     const query = req.query.fileName
     const response = await getAllFiles(true, query)
     res.send(response)
 }
 
-export const listRawFiles = async (req, res) => {
+const listRawFiles = async (req, res) => {
     const response = await getAllFiles(false)
     res.send(response)
 }
 
+module.exports = {
+    listFormattedFiles,
+    listRawFiles,
+}
