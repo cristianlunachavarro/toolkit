@@ -41,7 +41,7 @@ const processFileByName = (name) => {
     });
 };
 
-export const getAllFiles = (processed = true) => {
+export const getAllFiles = (processed = true, filename = undefined) => {
   return fetch(ENDPOINTS.LIST, {
     headers: {
       authorization: token,
@@ -52,6 +52,7 @@ export const getAllFiles = (processed = true) => {
     if (processed) {
       const items = [];
       for (let i = 0; i < data.files.length; i++) {
+        if (filename && filename !== data.files[i]) continue
         items.push(await processFileByName(data.files[i]));
       }
       return items;

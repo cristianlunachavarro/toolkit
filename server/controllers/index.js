@@ -1,7 +1,8 @@
 import { getAllFiles } from "../utilities/index.js"
 
 export const listFormattedFiles = async (req, res) => {
-    const response = await getAllFiles()
+    const query = req.query.fileName
+    const response = await getAllFiles(true, query)
     res.send(response)
 }
 
