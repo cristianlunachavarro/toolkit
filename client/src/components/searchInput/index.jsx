@@ -16,6 +16,12 @@ const SearchInput = () => {
     setTextInput("");
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = useCallback(() => {
     dispatch(getCsvList(textInput));
   }, [textInput, dispatch]);
@@ -32,9 +38,9 @@ const SearchInput = () => {
         value={textInput}
         type="text"
         className="form-control"
-        placeholder="Recipient's username"
-        aria-label="Recipient's username with two button addons"
+        placeholder="Escriba el nombre del archivo"
         onChange={handleTextInput}
+        onKeyDown={handleKeyPress}
       />
       <button
         className="btn btn-outline-secondary"
