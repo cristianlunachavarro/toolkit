@@ -56,7 +56,6 @@ const getAllFiles = (processed = true, filename = undefined) => {
         }
         return items;
       }
-
       return data;
     })
     .catch((err) => {
@@ -68,6 +67,5 @@ const getAllFiles = (processed = true, filename = undefined) => {
 module.exports = {
   getAllFiles,
   ENDPOINTS,
-  token,
-  fetch,
+  token
 };
