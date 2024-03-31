@@ -16,7 +16,7 @@ const CsvList = () => {
 
   return (
     <div className="m-5">
-      {list.length > 0 ? (
+      {list && list.length > 0 ? (
         <table className="table table-bordered table-striped">
           <thead>
             <tr>
@@ -44,7 +44,7 @@ const CsvList = () => {
           </tbody>
         </table>
       ) : (
-        <div class="alert alert-light" role="alert">
+        <div className="alert alert-light" role="alert">
           No existen archivos con ese nombre
         </div>
       )}
