@@ -22,8 +22,9 @@ const processFileByName = (name) => {
       const lines = data.split("\n");
       for (let i = 0; i < lines.length; i++) {
         try {
+          if (lines[i].includes('"status":404') || lines[i].includes('"status":500')) continue;
           const [, text, number, hex] = lines[i].split(",");
-          if (!text?.trim() || !number?.trim() || !hex?.trim()) continue;
+          if (!text?.trim() || !number?.trim() || !hex?.trim() ) continue;
           response.lines.push({ text, number, hex });
         } catch {
           continue;
