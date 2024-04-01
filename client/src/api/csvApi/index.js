@@ -1,16 +1,17 @@
-import axios from "axios";
-import { getList, setLoader } from "../../store/scvSlice";
+// import axios from "axios";
+const { getList, setLoader } = require("../../store/scvSlice");
+const axios = require("axios");
 
 export const getCsvList =
   (fileName = "") =>
   (dispatch) => {
     dispatch(setLoader({ error: true }));
-    axios(`http://localhost:3000/files/data/${fileName ? fileName : ""}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    axios
+      .get(`http://localhost:3000/files/data/${fileName ? fileName : ""}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => res.data)
       .then((data) => {
         dispatch(getList({ list: data }));
@@ -21,3 +22,7 @@ export const getCsvList =
         console.error("Error fetching data:", error);
       });
   };
+
+const exports = { getCsvList };
+
+export default exports;
