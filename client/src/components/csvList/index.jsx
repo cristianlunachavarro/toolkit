@@ -7,6 +7,18 @@ const CsvList = () => {
   const dispatch = useDispatch();
 
   const list = useSelector((state) => state.csvList.list);
+
+  const sortedList = [...list].sort((a, b) => {
+    const fileANum = parseInt(a.file.match(/\d+/));
+    const fileBNum = parseInt(b.file.match(/\d+/));
+    if (isNaN(fileANum) && isNaN(fileBNum)) {
+      return a.file.localeCompare(b.file);
+    }
+    if (isNaN(fileANum)) return 1;
+    if (isNaN(fileBNum)) return -1;
+    return fileANum - fileBNum;
+  });
+
   const hasLines = useMemo(() => {
     return list.some((l) => l?.lines?.length > 0);
   });
@@ -14,7 +26,6 @@ const CsvList = () => {
     dispatch(getCsvList());
   }, []);
 
-  let index = 0;
   if (list.length === 0)
     return (
       <div className="m-5" data-testid="csv-list">
@@ -52,12 +63,11 @@ const CsvList = () => {
           </tr>
         </thead>
         <tbody className="table-group-divider" data-testid="csv-list-elements">
-          {list &&
-            list.map((ele) =>
-              ele.lines.map((line) => {
-                index++;
+          {sortedList &&
+            sortedList.map((ele) =>
+              ele.lines.map((line, idx) => {
                 return (
-                  <tr key={index}>
+                  <tr key={`${ele}-${idx}`}>
                     <td>{ele.file}</td>
                     <td>{line.text}</td>
                     <td>{line.number}</td>

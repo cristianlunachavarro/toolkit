@@ -7,7 +7,7 @@ export const getCsvList =
   (dispatch) => {
     dispatch(setLoader({ error: true }));
     axios
-      .get(`http://localhost:3000/files/data/${fileName ? fileName : ""}`, {
+      .get(`http://localhost:3000/files/data/${fileName && fileName}`, {
         headers: {
           "Content-Type": "application/json",
         },

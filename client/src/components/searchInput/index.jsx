@@ -6,6 +6,7 @@ const SearchInput = () => {
   const dispatch = useDispatch();
 
   const [textInput, setTextInput] = useState("");
+  const [cleanText, setCleanText] = useState(false);
 
   const handleTextInput = (e) => {
     const value = e.target.value;
@@ -13,6 +14,7 @@ const SearchInput = () => {
   };
 
   const handleResetTextInput = () => {
+    setCleanText(true);
     setTextInput("");
   };
 
@@ -27,10 +29,11 @@ const SearchInput = () => {
   }, [textInput, dispatch]);
 
   useEffect(() => {
-    if (textInput === "") {
-      handleSubmit();
+    if (cleanText) {
+      dispatch(getCsvList());
     }
-  }, [textInput, handleSubmit]);
+    setCleanText(false);
+  }, [cleanText, dispatch, handleSubmit]);
 
   return (
     <div className="input-group mx-auto w-75 mt-5">
