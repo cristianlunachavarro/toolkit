@@ -7,7 +7,6 @@ const CsvList = () => {
   const dispatch = useDispatch();
 
   const list = useSelector((state) => state.csvList.list);
-
   const sortedList = [...list].sort((a, b) => {
     const fileANum = parseInt(a.file.match(/\d+/));
     const fileBNum = parseInt(b.file.match(/\d+/));
